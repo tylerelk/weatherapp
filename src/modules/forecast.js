@@ -1,5 +1,5 @@
 export default async function Forecast(location, key) {
-  const weatherAPI = "https://api.weatherapi.com/v1/forecast.json";
+  const weatherAPI = "https://cors-anywhere.herokuapp.com/https://api.weatherapi.com/v1/forecast.json";
   let result;
   let weather = {
     location: {},
