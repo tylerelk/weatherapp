@@ -1,0 +1,28 @@
+:root {
+    --background: ;
+    --highlight: ;
+    --text: ;
+    --accent: ;
+}
+
+body {
+    background-color: var(--background);
+}
+
+h1,
+h2 {
+    color: var(--highlight);
+}
+
+h3,
+h4,
+h5,
+p,
+input,
+button {
+    color: var(--text);
+}
+
+div {
+    border: 5px solid var(--accent)
+}

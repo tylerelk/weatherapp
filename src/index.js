@@ -1,6 +1,7 @@
 //imports
 import DOMRender from "./modules/dom";
 import InitialLocation from "./modules/initiallocation";
+import './style.css';
 
 //variables
 const weatherAPIKey = 'b58c63519071410d91613011243003';

@@ -9,11 +9,17 @@ export default function Loader() {
     spinner.style.border = '10px solid grey';
     spinner.style.borderTop = '10px solid black';
     spinner.style.borderBottom = '10px solid black';
+    spinner.style.width = '20rem';
+    spinner.style.height = '20rem';
+    spinner.style.marginTop = '20%';
 
     spinner.animate([
         {transform: 'rotate(0)'},
         {transform: 'rotate(360deg)'}
-    ]);
+    ], {
+        duration: 1000,
+        iterations: Infinity,
+    });
 
     message.textContent = 'Loading...';
 
@@ -27,6 +33,15 @@ export default function Loader() {
     overlay.style.flexDirection = 'column';
     overlay.style.alignItems = 'center';
     overlay.style.transition = '300ms';
+
+    overlay.animate([
+        {opacity: '0'},
+        {opacity: '100%'}
+    ],
+    {
+        duration: 300,
+        iterations: 1
+    })
 
     overlay.appendChild(spinner);
     overlay.appendChild(message);

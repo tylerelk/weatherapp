@@ -1,6 +1,7 @@
 import Card from "./card";
 import Forecast from "./forecast";
 import Loader, {showLoader, hideLoader} from "./loadingoverlay";
+import SetWeatherTheme from './theme'
 
 export default async function DOMRender(newLocation, units) {
   const APIkey = "b58c63519071410d91613011243003";
@@ -18,6 +19,8 @@ export default async function DOMRender(newLocation, units) {
   } catch (error) {
     console.error('Error fetching weather: ' + error);
   }
+  
+  SetWeatherTheme(weather.now.code);
 
   const weatherDisplay = new Card(weather.now, weather.forecast, units, weather.location.time);
   const weatherDisplayFuture = weatherDisplay.renderFuture();

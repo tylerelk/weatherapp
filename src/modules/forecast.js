@@ -39,6 +39,7 @@ export default async function Forecast(location, key) {
   weather.now.farenheit = result.current["temp_f"];
   weather.now.icon = result.current.condition.icon;
   weather.now.condition = result.current.condition.text;
+  weather.now.code = result.current.condition.code;
   formatDays(result.forecast.forecastday);
 
   function formatDays(arr) {
