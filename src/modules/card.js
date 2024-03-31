@@ -1,8 +1,9 @@
 export default class Card {
-    constructor(now, forecast, selectedUnit) {
+    constructor(now, forecast, selectedUnit, time) {
         this.now = now,
         this.forecast = forecast,
         this.selectedUnit = selectedUnit
+        this.time = time;
     }
 
     renderToday() {
@@ -18,7 +19,7 @@ export default class Card {
         container.appendChild(condition);
         container.appendChild(temp);
 
-        date.textContent = new Date();
+        date.textContent = this.time;
         icon.src = this.now.icon;
         condition.textContent = this.now.condition;
         temp.textContent = this.selectedUnit === 'farenheit' ? this.now.farenheit : this.now.celsius;

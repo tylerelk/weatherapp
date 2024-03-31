@@ -1,14 +1,25 @@
 import Card from "./card";
 import Forecast from "./forecast";
+import Loader, {showLoader, hideLoader} from "./loadingoverlay";
 
 export default async function DOMRender(newLocation, units) {
   const APIkey = "b58c63519071410d91613011243003";
-  const weather = await Forecast(newLocation, APIkey);
+  let weather;
   const root = document.querySelector(".root-div");
+  root.appendChild(Loader());
 
-  root.innerHTML = "";
+  try {
+    showLoader();
+    weather = await Forecast(newLocation, APIkey);
+    if (weather.error) {
+      throw new Error(weather.error);
+    };
+    hideLoader();
+  } catch (error) {
+    console.error('Error fetching weather: ' + error);
+  }
 
-  const weatherDisplay = new Card(weather.now, weather.forecast, units);
+  const weatherDisplay = new Card(weather.now, weather.forecast, units, weather.location.time);
   const weatherDisplayFuture = weatherDisplay.renderFuture();
 
   const currentLocation = document.createElement("h2");
@@ -47,6 +58,7 @@ export default async function DOMRender(newLocation, units) {
   inputForm.appendChild(locationLabel);
   inputForm.appendChild(locationInput);
   inputForm.appendChild(locationSubmit);
+  inputForm.classList.add('location-input');
 
   tempSwitch.appendChild(celsSwitch);
   tempSwitch.appendChild(farenSwitch);
@@ -65,6 +77,8 @@ export default async function DOMRender(newLocation, units) {
 
   inputArea.appendChild(inputForm);
   inputArea.appendChild(tempSwitch);
+
+  root.innerHTML = '';
 
   root.appendChild(inputArea);
   root.appendChild(currentLocation);

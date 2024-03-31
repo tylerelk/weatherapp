@@ -22,12 +22,17 @@ export default async function Forecast(location, key) {
     } catch (error) {
         console.log(error.message);
         weather.error = error.message;
+        let errorDisplay = document.createElement('span');
+        errorDisplay.classList.add('error');
+        errorDisplay.textContent = error.message;
+        document.querySelector('.location-input').appendChild(errorDisplay);
     }
   }
 
   await getWeather(location, key);
 
   weather.location.country = result.location.country;
+  weather.location.region = result.location.region;
   weather.location.city = result.location.name;
   weather.location.time = result.location.localtime;
   weather.now.celsius = result.current["temp_c"];
