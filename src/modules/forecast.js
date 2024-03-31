@@ -1,5 +1,5 @@
 export default async function Forecast(location, key) {
-  const weatherAPI = "http://api.weatherapi.com/v1/forecast.json";
+  const weatherAPI = "https://api.weatherapi.com/v1/forecast.json";
   let result;
   let weather = {
     location: {},
