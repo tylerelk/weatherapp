@@ -17,7 +17,9 @@ export default async function DOMRender(newLocation, units) {
     };
     hideLoader();
   } catch (error) {
+    hideLoader();
     console.error('Error fetching weather: ' + error);
+    document.getElementById('loading-screen').style.visibility = 'none';
   }
   
   SetWeatherTheme(weather.now.code);
@@ -25,7 +27,9 @@ export default async function DOMRender(newLocation, units) {
   const weatherDisplay = new Card(weather.now, weather.forecast, units, weather.location.time);
   const weatherDisplayFuture = weatherDisplay.renderFuture();
 
-  const currentLocation = document.createElement("h2");
+  const mainArea = document.createElement('div');
+  const forecastContainer = document.createElement('div');
+  const currentLocation = document.createElement("h3");
   const inputArea = document.createElement("div");
   const inputForm = document.createElement("div");
   const locationLabel = document.createElement("label");
@@ -35,6 +39,9 @@ export default async function DOMRender(newLocation, units) {
   const celsSwitch = document.createElement("button");
   const farenSwitch = document.createElement("button");
 
+  mainArea.classList.add('main-area');
+  forecastContainer.classList.add('forecast-container');
+  inputArea.classList.add('header');
   locationLabel.setAttribute("for", "location-input");
   locationInput.setAttribute("id", "location-input");
   locationInput.setAttribute("type", "text");
@@ -42,13 +49,14 @@ export default async function DOMRender(newLocation, units) {
   locationSubmit.setAttribute("value", "Search");
   locationSubmit.classList.add("submit-btn");
   locationSubmit.classList.add("btn");
-  tempSwitch.setAttribute("id", "temp-swtch");
+  tempSwitch.setAttribute("id", "temp-switch");
   celsSwitch.setAttribute("id", "celsius-switch");
   celsSwitch.setAttribute("value", "celsius");
   celsSwitch.classList.add("temp-switch");
   farenSwitch.setAttribute("id", "farenheit-switch");
   farenSwitch.setAttribute("value", "farenheit");
   farenSwitch.classList.add("temp-switch");
+  currentLocation.classList.add('current-location');
 
   locationSubmit.addEventListener("click", () => {
     if (!locationInput.value) {
@@ -72,8 +80,12 @@ export default async function DOMRender(newLocation, units) {
     });
   });
 
-  currentLocation.textContent = `${weather.location.city}, ${weather.location.country}`;
-  locationLabel.textContent = "Change Location:";
+  if (weather.location.region === weather.location.country || weather.location.region === weather.location.city) {
+    currentLocation.innerHTML = weather.location.city + '<br>' + weather.location.country;
+  } else {
+    currentLocation.innerHTML = weather.location.city + '<br>' + weather.location.region + '<br>' + weather.location.country;
+  }
+  locationLabel.textContent = "Location: ";
   celsSwitch.textContent = "C°";
   farenSwitch.textContent = "F°";
   locationSubmit.textContent = "Search";
@@ -83,8 +95,11 @@ export default async function DOMRender(newLocation, units) {
 
   root.innerHTML = '';
 
-  root.appendChild(inputArea);
-  root.appendChild(currentLocation);
-  root.appendChild(weatherDisplay.renderToday());
-  weatherDisplayFuture.forEach((day) => root.appendChild(day));
+  mainArea.appendChild(inputArea);
+  mainArea.appendChild(currentLocation);
+  mainArea.appendChild(weatherDisplay.renderToday());
+  mainArea.appendChild(forecastContainer);
+  weatherDisplayFuture.forEach((day) => forecastContainer.appendChild(day));
+
+  root.appendChild(mainArea);
 }

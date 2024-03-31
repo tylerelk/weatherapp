@@ -1,28 +1,209 @@
 :root {
-    --background: ;
-    --highlight: ;
-    --text: ;
-    --accent: ;
+  --background: ;
+  --highlight: ;
+  --text: ;
+  --accent: ;
+  --shadow: ;
+}
+
+span {
+  position: absolute;
+  top: 100%;
+  left: 10%;
+  background-color: var(--highlight);
+  border-radius: 20px;
+  padding: 1rem;
+  text-align: center;
+  animation: fade-out 3s forwards;
+}
+
+@keyframes fade-out {
+    0% {
+        opacity: 100%;
+    }
+    50% {
+        opacity: 100%
+    }
+    100% {
+        opacity: 0;
+        visibility: 0;
+    }
+}
+
+@font-face {
+  font-family: "mainFont";
+  src: url("./assets/Montserrat-VariableFont_wght.ttf") format("truetype");
+}
+
+html * {
+  box-sizing: border-box;
+  font-family: "mainFont";
+}
+
+h2,
+h3,
+label,
+button,
+p {
+  color: var(--text);
+}
+
+input {
+  border-radius: 10px;
+  padding: 0.5rem;
+  text-align: center;
+  border: 2px solid var(--text);
 }
 
 body {
-    background-color: var(--background);
+  background-color: var(--background);
+  margin: 0;
+  padding: 0;
+  width: 100vw;
 }
 
-h1,
-h2 {
-    color: var(--highlight);
+.header {
+  width: 100%;
+  padding: 1rem;
+  margin: 0 auto;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: var(--accent);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: var(--text) 0px 4px 12px;
+  z-index: 1;
 }
 
-h3,
-h4,
-h5,
-p,
-input,
+.main-area {
+  margin-top: 9rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 button {
-    color: var(--text);
+  outline: none;
+  border: none;
+  background-color: var(--highlight);
+  border-radius: 10px;
+  margin: 2px;
 }
 
-div {
-    border: 5px solid var(--accent)
+.location-input {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  width: 50%;
+}
+
+#temp-switch {
+  height: 100%;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 1rem;
+}
+
+.temp-switch {
+  width: 40%;
+  padding: 0.5rem 0;
+  border-radius: 20px;
+  font-weight: 800;
+}
+
+.current-location {
+  width: 80%;
+  margin: 0 auto;
+  padding: 1rem 2rem;
+  background-color: var(--accent);
+  color: var(--text);
+  text-align: center;
+  border-radius: 20px;
+  box-shadow: var(--text) 0px 4px 12px;
+}
+
+.current-card {
+  width: 80%;
+  background-color: var(--accent);
+  color: var(--text);
+  padding: 1rem;
+  margin: 1rem auto;
+  text-align: center;
+  border-radius: 20px;
+  box-shadow: var(--text) 0px 4px 12px;
+}
+
+.current-card > h2 {
+  padding: 1rem;
+  border-radius: 20px;
+  background-color: var(--highlight);
+  box-shadow: var(--text) 0px 4px 12px;
+}
+
+.forecast-container {
+  width: 80%;
+  margin: 0 auto;
+  margin-bottom: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.forecast-card {
+  font-size: smaller;
+  box-shadow: var(--text) 0px 4px 12px;
+  padding: 1rem;
+  text-align: center;
+  border-radius: 20px;
+  color: var(--text);
+}
+
+@media (min-width: 760px) {
+  .header {
+    justify-content: flex-start;
+  }
+
+  .header > * {
+    width: min-content;
+  }
+
+  #temp-switch {
+    align-items: baseline;
+    flex-direction: column;
+    margin-left: 2rem;
+  }
+
+  #temp-switch * {
+    width: 25%;
+  }
+
+  .current-card,
+  .current-location {
+    width: 40%;
+  }
+
+  .forecast-card {
+    flex-grow: 1;
+    width: 50%;
+  }
+
+  .forecast-container {
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .forecast-card > img {
+    width: 50%;
+  }
+
+  span {
+    top: 10rem;
+    right: 5rem;
+  }
 }

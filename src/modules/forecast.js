@@ -34,7 +34,7 @@ export default async function Forecast(location, key) {
   weather.location.country = result.location.country;
   weather.location.region = result.location.region;
   weather.location.city = result.location.name;
-  weather.location.time = result.location.localtime;
+  weather.location.time = result.location.localtime_epoch;
   weather.now.celsius = result.current["temp_c"];
   weather.now.farenheit = result.current["temp_f"];
   weather.now.icon = result.current.condition.icon;
@@ -45,7 +45,7 @@ export default async function Forecast(location, key) {
   function formatDays(arr) {
     arr.forEach((day) => {
       weather.forecast.push({
-        date: day.date,
+        date: day.date_epoch,
         maxCelsius: day.day.maxtemp_c,
         minCelsius: day.day.mintemp_c,
         maxFarenheit: day.day.maxtemp_f,

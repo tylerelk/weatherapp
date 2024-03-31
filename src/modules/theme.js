@@ -69,34 +69,39 @@ export default function SetWeatherTheme(status) {
   };
   switch (condition()) {
     case "sunny":
-      document.documentElement.style.setProperty("--background", "#F6EEDF");
+      document.documentElement.style.setProperty("--background", "#fffdf5");
       document.documentElement.style.setProperty("--highlight", "#FFD31D");
-      document.documentElement.style.setProperty("--text", "#D63447");
+      document.documentElement.style.setProperty("--text", "#291c1d");
       document.documentElement.style.setProperty("--accent", "#F57B51");
+      document.documentElement.style.setProperty("--shadow", "#F57B511A");
       break;
     case "cloudy":
       document.documentElement.style.setProperty("--background", "#352F44");
       document.documentElement.style.setProperty("--highlight", "#5C5470");
       document.documentElement.style.setProperty("--text", "#FAF0E6");
       document.documentElement.style.setProperty("--accent", "#B9B4C7");
+      document.documentElement.style.setProperty("--shadow", "#B9B4C71A");
       break;
     case "rainy":
       document.documentElement.style.setProperty("--background", "#4B778D");
       document.documentElement.style.setProperty("--highlight", "#28B5B5");
       document.documentElement.style.setProperty("--text", "#D2E69C");
-      document.documentElement.style.setProperty("--accent", "#8FD9A8");
+      document.documentElement.style.setProperty("--accent", "#438a7c");
+      document.documentElement.style.setProperty("--shadow", "#8FD9A81A");
       break;
     case "snowy":
       document.documentElement.style.setProperty("--background", "#DFF5FF");
       document.documentElement.style.setProperty("--highlight", "#67C6E3");
-      document.documentElement.style.setProperty("--text", "#5356FF");
+      document.documentElement.style.setProperty("--text", "#676778");
       document.documentElement.style.setProperty("--accent", "#378CE7");
+      document.documentElement.style.setProperty("--shadow", "#378CE71A");
       break;
     case "stormy":
       document.documentElement.style.setProperty("--background", "#0E2954");
       document.documentElement.style.setProperty("--highlight", "#2E8A99");
       document.documentElement.style.setProperty("--text", "#84A7A1");
       document.documentElement.style.setProperty("--accent", "#1F6E8C");
+      document.documentElement.style.setProperty("--shadow", "#1F6E8C1A");
       break;
   }
 }
